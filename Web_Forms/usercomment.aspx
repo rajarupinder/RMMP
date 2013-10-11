@@ -23,6 +23,7 @@
     <script>
         function logout() {
 
+         
             document.location.href = " https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://ratemymp.venturepact.com";
             return true;
         }
@@ -122,7 +123,7 @@
                   <div class="name1">
                   <h5>Constituency:</h5><label><asp:Label ID="lblconstituency" runat="server" /></label>
                   </div>
-                  <div class="name1">
+                  <div class="name3">
                   <h5>Party:</h5><label><asp:Label ID="lblparty" runat="server" /></label>
                   </div>
                </div>
@@ -160,7 +161,8 @@
             <div id="home_container">
             	<div class="home_right">
                 	<label  class="user_outr"> <asp:Label ID="LBLuserName" runat="server" Text="Label"></asp:Label></label>
-                	<input  id="homeRedirect" type ="button" class="btn btn_home" OnClick="homeredirect()"  value="Home" />
+                	<%--<input  id="homeRedirect" type ="button" class="btn btn_home" onclick="homeredirect()"  value="Home" />--%>
+                    <asp:Button ID="Buttonredirect" class="btn btn_home" runat="server" Text="Home" OnClick="Buttonredirect_Click" />
                     <%--<input id="homeRedirect" class="btn btn_home" type="button"   value ="Home" />--%>
                     <input type="button" id="facebookLogout" class="btn btn_home" value="Logout"  runat="server"/>
                     <asp:Button ID="googleLogout" class="btn btn_home" runat="server" Text="Logout" Visible="false" OnClick="googleLogout_Click" />
@@ -173,7 +175,7 @@
                     <div class="text_editor_outr">
                     
                 	<%--<textarea name="textarea" class="jqte-test"></textarea>--%>
-                    <asp:TextBox ID="TXTissue" runat="server" CssClass=" txteditor " TextMode="MultiLine" PlaceHolder="Post Your Issues."/>
+                    <asp:TextBox ID="TXTissue" runat="server" CssClass=" txteditor " TextMode="MultiLine" PlaceHolder="Post Issue Here"/>
                 </div>
                        <div class="attach_file">
                     <asp:Button ID="BTNissuePost" runat="server" Text="Post" OnClick="BTNissuePost_Click" />
@@ -276,7 +278,7 @@
                     
                     <div class="text_comment">
                             <asp:TextBox ID="txtcomment" runat="server" TextMode="MultiLine" style="width:95%" />
-                             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtComment" WatermarkText="Puts Your Comments"/>
+                             <asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtComment" WatermarkText="Type Comment Here"/>
                         </div>
                        <div class="post_button">
                            <asp:Button ID="btnPost" runat="server" Text="Post" CommandName="post" style=" padding:  3px 15px 3px 15px;" />

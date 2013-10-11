@@ -28,7 +28,10 @@ public partial class Homepage : System.Web.UI.Page
             loadStates();
             loadlist(50,0,0);  
         }
-       LBLuserName.Text = "Hi! "+Session["fName"].ToString();
+       if (Session["userEmail"] != null)
+       {
+           LBLuserName.Text = "Hi! " + Session["fName"].ToString();
+       }
     }
     private void userCreateAndSession()
     {
@@ -87,6 +90,7 @@ public partial class Homepage : System.Web.UI.Page
                         //insert data into the database.
                         HiddenField1.Value = userMasterBAL.insertUser(userMasterBO);
                         Session["guid"] = (userMasterBAL.getGuid(userMasterBO)).ToString();
+                        LBLuserName.Text = "Hi! " + Session["fName"].ToString();
                         // Label1.Text = Session["guid"].ToString();
 
                     }

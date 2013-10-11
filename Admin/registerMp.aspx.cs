@@ -82,11 +82,41 @@ public partial class Admin_registerMp : System.Web.UI.Page
         mpDetailsBO.qualification = qualification.Text;
         mpDetailsBO.profession = profession.Text;
         mpDetailsBO.permenantAddress = permanentAddress.Text;
-        mpDetailsBO.permanentDistrict = Int16.Parse(DropDownpermanentDistrict.SelectedValue);
-        mpDetailsBO.permanentState = byte.Parse(DropDownpermanentState.SelectedValue);
+        if (DropDownpermanentDistrict.SelectedIndex == 0)
+        {
+            mpDetailsBO.permanentDistrict = 0;
+        }
+        else
+        {
+            mpDetailsBO.permanentDistrict = Int16.Parse(DropDownpermanentDistrict.SelectedValue);
+        }
+        if (DropDownpermanentState.SelectedIndex == 0)
+        {
+            mpDetailsBO.permanentState = 0;
+        }
+        else
+        {
+            mpDetailsBO.permanentState = byte.Parse(DropDownpermanentState.SelectedValue);
+        }
+       
         mpDetailsBO.currentAddress = currentAddress.Text;
-        mpDetailsBO.currentDistrictId = Int16.Parse(DropDowncurrentDistrict.SelectedValue);
-        mpDetailsBO.currentStateId = byte.Parse(DropDowncurrentState.SelectedValue);
+
+        if (DropDowncurrentDistrict.SelectedIndex == 0)
+        {
+            mpDetailsBO.currentDistrictId = 0;
+        }
+        else
+        {
+            mpDetailsBO.currentDistrictId = Int16.Parse(DropDowncurrentDistrict.SelectedValue);
+        }
+        if (DropDowncurrentState.SelectedIndex == 0)
+        {
+            mpDetailsBO.currentStateId = 0;
+        }
+        else
+        {
+            mpDetailsBO.currentStateId = byte.Parse(DropDowncurrentState.SelectedValue);
+        }
 
         saveMpDetails( actualFileName,destfolder);
 

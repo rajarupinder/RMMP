@@ -3,9 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
   
-<asp:Content ID="Content1" runat="server" contentplaceholderid="ContentPlaceHolder1">
-
-      
+<asp:Content ID="Content1" runat="server" contentplaceholderid="ContentPlaceHolder1">  
     <div id="content">
    
          <script lang="javascript" type="text/javascript">
@@ -20,7 +18,18 @@
                  var constituency = $('#<%= DropDownconstituency.ClientID %>').val();
                  var party = $('#<%= DropDownparty.ClientID %>').val();
                  var electedYear = $('#<%= DropDownelectedYear.ClientID %>').val();
-                 if(fname==''||lname==''||email==''||fupload==''||country==0||state==0||constituency==0||party==0||electedYear==0)
+                 // additional
+                 var mname = $('#<%= middleName.ClientID %>').val();
+                 var qualification = $('#<%= qualification.ClientID %>').val();
+                 var profession = $('#<%= profession.ClientID %>').val();
+                 var perAdd = $('#<%= permanentAddress.ClientID %>').val();
+                 var perDid = $('#<%= DropDownpermanentDistrict.ClientID %>').val();
+                 var perSid = $('#<%= DropDownpermanentState.ClientID %>').val();
+                 var curADD = $('#<%= currentAddress.ClientID %>').val();
+                 var curDid = $('#<%= DropDowncurrentDistrict.ClientID %>').val();
+                 var curSid = $('#<%= DropDowncurrentState.ClientID %>').val();
+
+                 if (fname == '' || lname == '' || email == '' || fupload == '' || country == 0 || state == 0 || constituency == 0 || party == 0 || electedYear == 0 || mname == '' || qualification == '' || profession == '' || perAdd == '' || perDid == 0 || perSid == 0 || curADD == '' || curDid == 0 || curSid == 0)
                  {
                      alert("please fill up all required field.");
                      return false;
@@ -54,7 +63,7 @@
         <asp:TextBox ID="lastName" runat="server" Width="142px"></asp:TextBox>
         <br/>
         <asp:Label CssClass="lbl" ID="lemail" runat="server" Text="E-Mail" Width="200px"></asp:Label>   
-         <asp:TextBox ID="email" runat="server" Width="142px" ></asp:TextBox>
+         <asp:TextBox ID="email" runat="server" Width="142px" TextMode="Email"></asp:TextBox>
 
              <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="email" ErrorMessage="Enter Valid Email" Font-Size="Smaller" ForeColor="Red" SetFocusOnError="True" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 
@@ -99,15 +108,11 @@
 
          <br/>
         <asp:Label CssClass="lbl" ID="Lphone" runat="server" Text="Phone" Width="200px"></asp:Label>   
-        <asp:TextBox ID="phone" runat="server" Width="142px" MaxLength="20" OnTextChanged="phone_TextChanged"></asp:TextBox>
-        
-             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="phone" ErrorMessage="Enter Valid Phone Number" Font-Size="Smaller" ForeColor="Red" SetFocusOnError="True" ValidationExpression="\d{10,17}"></asp:RegularExpressionValidator>
+        <asp:TextBox ID="phone" runat="server" Width="142px" MaxLength="20" TextMode="Number" OnTextChanged="phone_TextChanged"></asp:TextBox>
         
         <br/>
         <asp:Label CssClass="lbl" ID="Lmobile" runat="server" Text="Mobile" Width="200px"></asp:Label>   
-        <asp:TextBox ID="mobile" runat="server" Width="142px" MaxLength="20"></asp:TextBox>
-        
-             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="mobile" ErrorMessage="Enter Valid Mobile Number" Font-Size="Smaller" ForeColor="Red" SetFocusOnError="True" ValidationExpression="\d{10,17}"></asp:RegularExpressionValidator>
+        <asp:TextBox ID="mobile" runat="server" Width="142px" MaxLength="20" TextMode="Phone"></asp:TextBox>
         
         <br/>
         <asp:Label CssClass="lbl" ID="Lqualfication" runat="server" Text="Qualification" Width="200px"></asp:Label>   

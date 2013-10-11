@@ -233,7 +233,7 @@ text-shadow: 0px 0px 1px #003;
 	width:100%;
     background:#f0f0f0;
     border:1px solid #ccc;
-	margin-top:6px;
+	margin-top:10px;
 }
 .home_left_pic
 {
@@ -513,7 +513,7 @@ text-shadow: 0px 0px 1px #003;
 .name1
 	{
     float:left;
-	width:84%;
+	width:100%;
 	
 	}
 .name2
@@ -522,20 +522,31 @@ text-shadow: 0px 0px 1px #003;
 	width:100%;
 	font-size:12px;
 	}
+.name3
+{
+	width:99%;
+	float:left;
+	font-size:12px;
+}
 .up_labels h5
 {
 	float:left;
-	width:51%;
+	width:38%;/*51*/
 	margin-left: 12px;
 	font-size:13px;
 	font-weight: normal;
+	margin-top:0px;
 }
 .up_labels label
 {
-	float:left;
+	/*float:left;
 	margin-top:10px;
 	width:40%;
-	font-size:12px;
+	font-size:12px; */
+	float: left;
+    font-size: 12px;
+    margin-top: 0px; /*10*/
+    width: 56%;
 	
 }
 .down_labels
@@ -548,17 +559,19 @@ text-shadow: 0px 0px 1px #003;
 .down_labels h5
 {
 	float:left;
-	width:43%;
+	width:39%;
 	margin-left: 10px;
+	margin-top:0px;
 	font-weight: normal;
 	font-size:13px;
 	margin-bottom: 0px;
+	
 
 }
 .down_labels label
 {
 	float:left;
-	margin-top:10px;
+	margin-top:0px;
 	width:52%;
 	font-size: 12px;
 	

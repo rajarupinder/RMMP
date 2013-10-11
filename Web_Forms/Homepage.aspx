@@ -30,6 +30,7 @@
     <script>
         function logout() {
 
+            //
             document.location.href = " https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://ratemymp.venturepact.com";
             return true;
         }
@@ -130,7 +131,7 @@
             <div id="home_container">
             	<div class="home_right">
                 	<label class="user_outr"><asp:Label ID="LBLuserName" runat="server" Text="Hi Singh"/></label>
-                	<input type="button" class="btn btn_home" value="Home" />
+                	<%--<input type="button" class="btn btn_home" value="Home" />--%>
                     <input type="button" id="facebookLogout" class="btn btn_home" value="Logout"  runat="server"/>
                     <asp:Button ID="googleLogout" class="btn btn_home" runat="server" Text="Logout" Visible="false" OnClick="googleLogout_Click" />
                     <asp:Button ID="localLogout" class="btn btn_home" runat="server" Text="Logout"  Visible="false" OnClick="localLogout_Click"/>
@@ -240,7 +241,7 @@
                    </ItemTemplate></asp:Repeater> 
                     
                     <div class="text_comment">
-                            <asp:TextBox ID="txtcomment" placeholder="Puts Your Comments" runat="server" TextMode="MultiLine" style="width:95%" />
+                            <asp:TextBox ID="txtcomment" placeholder="Type Comment Here" runat="server" TextMode="MultiLine" style="width:95%" />
                              <%--<asp:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" TargetControlID="txtComment" WatermarkText="Puts Your Comments"/>--%>
                         </div>
                        <div class="post_button">

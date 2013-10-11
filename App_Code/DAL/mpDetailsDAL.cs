@@ -20,7 +20,6 @@ public class mpDetailsDAL
     {
         try
         {
-
             query = "MPDETAILS_FETCHING";
             if (con.State == ConnectionState.Closed)
             {
@@ -64,7 +63,6 @@ public class mpDetailsDAL
             cmd.Parameters.AddWithValue("@status", userMasterBO.status);
             cmd.Parameters.AddWithValue("@profilepic", userMasterBO.profilePicPath);
          
-
             // now the part of mpdetails table
             cmd.Parameters.AddWithValue("@countryId", mpDetailsBO.countryId);
             cmd.Parameters.AddWithValue("@constituencyId", mpDetailsBO.constituencyId);
@@ -83,9 +81,7 @@ public class mpDetailsDAL
             SqlParameter message = cmd.Parameters.Add("@message", SqlDbType.Bit);
             message.Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
-
             return (bool.Parse(message.Value.ToString()));
-
         }
         catch
         {

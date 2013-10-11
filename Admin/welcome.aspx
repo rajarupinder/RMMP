@@ -2,39 +2,7 @@
 
 <asp:Content ID="Content1" runat="server" contentplaceholderid="ContentPlaceHolder1">
 
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz 
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
-                    nckznclkznclknckznckz
+                   This is welcome page . Design is still under construction..................
 </asp:Content>
 
 

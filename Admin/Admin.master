@@ -16,22 +16,22 @@
     <div id="container">
         <!--header starts-->
             <div id="header">
-                <div id="header-left"><h4>Rate My MP</h4></div>
-                <div id="header-right">Hello Admin...!!</div>
-                <div id="header-logout"><asp:Button ID="logout" runat="server" Text="Logout" OnClick="logout_Click" /></div>
+                <div id="header-logo"><h4>Rate My MP</h4></div>
+                <asp:Button ID="logout" Class="btn" runat="server" Text="Logout" OnClick="logout_Click" />
+                
             </div>
         <!--header ends-->
         
         <!--main body starts-->
         <div id="main">
             <div id="sidebar">
-                <a href="welcome.aspx"><div class="buttons"><img src="../images/admin/home.png" /><br />HOME</div></a>
-                <a href="registerMp.aspx"><div class="buttons"><img src="../images/admin/addmp.png" /><br />Register MP </div></a>
-                <a href="addCountry.aspx"> <div class="buttons"><img src="../images/admin/country.png" /><br />Add Country</div></a>
-                <a href="addConstituency.aspx"><div class="buttons"><img src="../images/admin/add.png" /><br />Add Constituency</div></a>
-                 <a href="addState.aspx"> <div class="buttons"><img src="../images/admin/add.png" /><br />Add State</div></a>
-                <a href="addDistrict.aspx"><div class="buttons"><img src="../images/admin/userview.png" /><br />Add District</div></a>
-                 <a href="addParty.aspx"> <div class="buttons"><img src="../images/admin/mpview.png" /><br />Add Party</div></a>
+                <a href="welcome.aspx"><div class="buttons"><div class="btn-icon"><img src="../images/admin/icon-home.png" /></div><div class="btn-txt">HOME</div></div></a>
+                <a href="registerMp.aspx"><div class="buttons"><img src="../images/admin/icon-user.png" /><br />Register MP </div></a>
+                <a href="addCountry.aspx"> <div class="buttons"><img src="../images/admin/icon-country.png" /><br />Add Country</div></a>
+                <a href="addConstituency.aspx"><div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add Constituency</div></a>
+                <a href="addState.aspx"> <div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add State</div></a>
+                <a href="addDistrict.aspx"><div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add District</div></a>
+                <a href="addParty.aspx"> <div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add Party</div></a>
                 
             </div>
             <div id="content-main">
@@ -43,9 +43,9 @@
         <!--main body ends-->
        <div id="footer">
                  <div id="social">
-                    <div class="icon"><a href="#"><img src="../images/admin/google.png" /></a></div>
-                     <div class="icon"><a href="#"><img src="../images/admin/facebook.png" /></a></div>
-                     <div class="icon"><a href="#"><img src="../images/admin/twitter.png" /></a></div>
+                    <div class="icon"><a href="#"><img src="../images/admin/google-square.png" /></a></div>
+                     <div class="icon"><a href="#"><img src="../images/admin/facebook-square.png" /></a></div>
+                     <div class="icon"><a href="#"><img src="../images/admin/twitter-square.png" /></a></div>
                  </div>
              </div>
     </div>

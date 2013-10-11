@@ -27,7 +27,11 @@ public partial class Web_Forms_usercomment : System.Web.UI.Page
             conId =Int16.Parse( Request["cid"].ToString());
             getMpdata(conId);
         }
-        LBLuserName.Text= "Hi! " + Session["fName"].ToString();
+        if (Session["userEmail"] != null)
+        {
+            LBLuserName.Text = "Hi! " + Session["fName"].ToString();
+        }
+    
     }
     private void userCreateAndSession()
     {
@@ -65,7 +69,8 @@ public partial class Web_Forms_usercomment : System.Web.UI.Page
         {
             DataTable dt = new DataTable();
             dt = mpdetailsbal.getData(constituencyId); /** empid fetch throw ***/
-            imgMpProfile.ImageUrl = dt.Rows[0]["profilePic"].ToString();
+            string destPicFolder = Server.MapPath("~/images/mp/");
+            imgMpProfile.ImageUrl = destPicFolder + dt.Rows[0]["profilePic"].ToString();
             lblname.Text = dt.Rows[0]["firstName"].ToString() + "  " + dt.Rows[0]["middleName"].ToString() + " " + dt.Rows[0]["lastName"].ToString();
             lblconstituency.Text = dt.Rows[0]["constituency"].ToString();
             lblparty.Text = dt.Rows[0]["partyName"].ToString() + "(" + dt.Rows[0]["Abbreviation"].ToString() + ")";
@@ -73,8 +78,8 @@ public partial class Web_Forms_usercomment : System.Web.UI.Page
             lblcntct.Text = dt.Rows[0]["mobile"].ToString();
             lbleducational_q.Text = dt.Rows[0]["qualification"].ToString();
             lblprofession.Text = dt.Rows[0]["profession"].ToString();
-            lblp_address.Text = dt.Rows[0]["permanentAddress"].ToString() + ", " + dt.Rows[0][12].ToString() + ", " + dt.Rows[0][13].ToString();
-            lblpresent_address.Text = dt.Rows[0]["currentAddress"].ToString() + ", " + dt.Rows[0][15].ToString() + ", " + dt.Rows[0][16].ToString();
+            lblp_address.Text = dt.Rows[0]["permanentAddress"].ToString() + ", " + dt.Rows[0][13].ToString() + ", " + dt.Rows[0][14].ToString();
+            lblpresent_address.Text = dt.Rows[0]["currentAddress"].ToString()+ ", " + dt.Rows[0][16].ToString() + ", " + dt.Rows[0][17].ToString();
             mpidval = Int64.Parse(dt.Rows[0]["mpId"].ToString());
             //DataTable numDt = new DataTable();
             //numDt = issuesbal.Issues_Numbers(Convert.ToInt64(dt.Rows[0]["mpId"]));
@@ -345,5 +350,9 @@ public partial class Web_Forms_usercomment : System.Web.UI.Page
             Session.Abandon();
             Response.Redirect("../Default.aspx");
         }
+    }
+    protected void Buttonredirect_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Web_Forms/Homepage.aspx");
     }
 }
