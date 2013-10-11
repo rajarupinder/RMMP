@@ -329,7 +329,7 @@
             	<table class="pull-right color-white span12">
                   	<tr>
                        	<td><%--<input type="text"  placeholder="Email" class="input-large"/>--%>
-                            <asp:TextBox ID="signinemail" class="input-large" placeholder="email" runat="server" TextMode="Email" MaxLength="49"></asp:TextBox>
+                            <asp:TextBox ID="signinemail" class="input-large" placeholder="email" runat="server"  MaxLength="49"></asp:TextBox>
                        <asp:RegularExpressionValidator ID="signinEmailValidation"  runat="server" ErrorMessage="Please enter valid email id" ControlToValidate="signinemail" ForeColor="#FF0066" SetFocusOnError="True" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>  
                            </td>
                         <td><%--<input type="password"  placeholder="Password" class="input-large"/>--%>
@@ -467,7 +467,7 @@
                     <tr>
                        	<td>
                                <%--<input type="text" placeholder="Email" class="input-large"/>--%>
-                               <asp:TextBox ID="email" class="input-large" placeholder="Email" runat="server" MaxLength="49" TabIndex="10" TextMode="Email"></asp:TextBox>
+                               <asp:TextBox ID="email" class="input-large" placeholder="Email" runat="server" MaxLength="49" TabIndex="10" ></asp:TextBox>
                        	 
                            </td>
                         <td>

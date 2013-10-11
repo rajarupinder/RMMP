@@ -63,7 +63,7 @@
         <asp:TextBox ID="lastName" runat="server" Width="142px"></asp:TextBox>
         <br/>
         <asp:Label CssClass="lbl" ID="lemail" runat="server" Text="E-Mail" Width="200px"></asp:Label>   
-         <asp:TextBox ID="email" runat="server" Width="142px" TextMode="Email"></asp:TextBox>
+         <asp:TextBox ID="email" runat="server" Width="142px" ></asp:TextBox>
 
              <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="email" ErrorMessage="Enter Valid Email" Font-Size="Smaller" ForeColor="Red" SetFocusOnError="True" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
 
@@ -108,11 +108,11 @@
 
          <br/>
         <asp:Label CssClass="lbl" ID="Lphone" runat="server" Text="Phone" Width="200px"></asp:Label>   
-        <asp:TextBox ID="phone" runat="server" Width="142px" MaxLength="20" TextMode="Number" OnTextChanged="phone_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="phone" runat="server" Width="142px" MaxLength="20"  OnTextChanged="phone_TextChanged"></asp:TextBox>
         
         <br/>
         <asp:Label CssClass="lbl" ID="Lmobile" runat="server" Text="Mobile" Width="200px"></asp:Label>   
-        <asp:TextBox ID="mobile" runat="server" Width="142px" MaxLength="20" TextMode="Phone"></asp:TextBox>
+        <asp:TextBox ID="mobile" runat="server" Width="142px" MaxLength="20" ></asp:TextBox>
         
         <br/>
         <asp:Label CssClass="lbl" ID="Lqualfication" runat="server" Text="Qualification" Width="200px"></asp:Label>   
