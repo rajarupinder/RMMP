@@ -86,6 +86,10 @@ body
 {
 	padding-bottom:60px;
 }
+.padding-bottom65
+{
+	padding-bottom:65px;
+}
 .mg-top10
 {
 	margin-top:10px;
@@ -97,6 +101,10 @@ body
 .mg-top40
 {
 	margin-top:40px;
+}
+.mg-top30
+{
+	margin-top:30px;
 }
 .mg-top50
 {
@@ -163,4 +171,16 @@ body
 #signinPasswordValidation
 {
 
+}
+.div-logo {
+    margin-left:154px;
+    margin-top:2px;
+    height: 70px;
+    width: 115px;
+    float: left;
+}
+.footer_main
+{
+	position:fixed;
+	bottom:0px;
 }

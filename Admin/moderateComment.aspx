@@ -38,7 +38,7 @@
                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Report As Abuse" Visible="true">
                      <ItemTemplate>
-                             <asp:CheckBox ID="chkReportAbuse" Visible="true" runat="server" Checked='<%# Convert.ToBoolean(Eval("reportAbuseComment")) %>'></asp:CheckBox>
+                             <asp:CheckBox ID="chkReportAbuse" Visible="true" runat="server" Checked='<%# Convert.ToBoolean(Eval("reportAbuse")) %>'></asp:CheckBox>
                     </ItemTemplate>
                 </asp:TemplateField>
                  <asp:TemplateField HeaderText="Update">

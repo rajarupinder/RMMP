@@ -14,20 +14,24 @@ public partial class Homepage : System.Web.UI.Page
     private SupportDenyBAL supportdenybal = new SupportDenyBAL();
     private LikeDislikeBAL likedislikebal = new LikeDislikeBAL();
     private CommentBAL commentbal = new CommentBAL();
+    private ReportBAL reportbal = new ReportBAL();
+
     userMasterBO userMasterBO = new userMasterBO();
     userMasterBAL userMasterBAL = new userMasterBAL();
 
     protected void Page_Load(object sender, EventArgs e)
     {
         googleLogout.Attributes.Add("OnClick", "javascript: return logout()");// registering the javascript function for onclick event of linkbutton
-       if (!Page.IsPostBack)
+        Btnsearch.Attributes.Add("OnClick", "javascript: return mpNotExist()");
+        if (!Page.IsPostBack)
        {
-           //Btnsearch.Enabled = false;
-           //LBsearch.Enabled = false;
-           userCreateAndSession();
+            //Btnsearch.Enabled = false;
+            //LBsearch.Enabled = false;
+            userCreateAndSession();
             loadStates();
             loadlist(50,0,0);  
-        }
+       }
+
        if (Session["userEmail"] != null)
        {
            LBLuserName.Text = "Hi! " + Session["fName"].ToString();
@@ -40,7 +44,7 @@ public partial class Homepage : System.Web.UI.Page
         string lname = "";
         if (Request.Cookies["UserCookies"] == null)
         {
-            if (Request.UrlReferrer != null)
+            if (Request.UrlReferrer != null  )
             {
                 ss = Request.UrlReferrer.AbsoluteUri.ToString();
                 ss = ss.Substring(ss.LastIndexOf("/") + 1);
@@ -102,7 +106,8 @@ public partial class Homepage : System.Web.UI.Page
                 }
                 else //every this is already done(session and storing of data in database is already done)
                 {
-
+                    if (Session["userEmail"] == null)
+                    Response.Redirect("../Default.aspx");   
                 }
             }
             else
@@ -149,13 +154,26 @@ public partial class Homepage : System.Web.UI.Page
 
     protected void DDListState_SelectedIndexChanged(object sender, EventArgs e)
     {
+        Image1.ImageUrl = "../images/gif-load.gif";
+        Image1.Visible = true;
+
         Int16 stateId = Convert.ToInt16(DDListState.SelectedValue);
         DDListConstituency.Items.Clear();
-        DDListConstituency.DataSource = (DataTable)constituency.getData(stateId);
-        DDListConstituency.DataTextField = "constituency";
-        DDListConstituency.DataValueField = "constituencyId";
-        DDListConstituency.DataBind();
-        DDListConstituency.Items.Insert(0, new ListItem("Select Constituency","0"));
+        DataTable dt = (DataTable)constituency.getData(stateId);
+        if (dt.Rows.Count > 0)
+        {
+            DDListConstituency.DataSource = dt;
+            DDListConstituency.DataTextField = "constituency";
+            DDListConstituency.DataValueField = "constituencyId";
+            DDListConstituency.DataBind();
+            DDListConstituency.Items.Insert(0, new ListItem("Select Constituency", "0"));
+        }
+        else
+        {
+            DDListConstituency.Items.Insert(0, new ListItem("Select Constituency", "0"));
+        }
+
+        Image1.Visible = false;
     }
 
     protected void Btnsearch_Click(object sender, EventArgs e)
@@ -165,10 +183,20 @@ public partial class Homepage : System.Web.UI.Page
             Page.ClientScript.RegisterStartupScript(this.GetType(),"myfunction","searchvalidate()",true);
         }
         else
-        {Int16 constituencyId = Convert.ToInt16(DDListConstituency.SelectedValue);
+        {
+            Int16 constituencyId = Convert.ToInt16(DDListConstituency.SelectedValue);
             // HFconstituencyId.Value = "1";//constituencyId.ToString();
             //Server.Transfer("usercomment.aspx", true);
-            Response.Redirect("usercomment.aspx?cid=" + constituencyId);
+            bool res = constituency.checkMpExistOrNot(constituencyId);
+            if (res == true)
+            {
+                Response.Redirect("usercomment.aspx?cid=" + constituencyId);
+            }
+            else
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "myfunction", "mpNotExist()", true);
+            }
+
         }
     }
     protected void LBtrending_Click(object sender, EventArgs e)
@@ -198,30 +226,37 @@ public partial class Homepage : System.Web.UI.Page
         /****Issues***/
         ((Image)e.Item.FindControl("IMGprofilePic")).ImageUrl = dt.Rows[0]["profilePic"].ToString();
         ((Label)e.Item.FindControl("LBLpostedBy")).Text = dt.Rows[0]["firstName"].ToString() + " " + dt.Rows[0]["lastName"].ToString();
-        ((Label)e.Item.FindControl("LBLpstate")).Text = "Andheri East(Mumbai)";
+       // ((Label)e.Item.FindControl("LBLpstate")).Text = "Andheri East(Mumbai)";
         ((Label)e.Item.FindControl("LBLdt")).Text = ((DateTime)(dt.Rows[0]["postedOn"])).ToString("d/MMM/yyyy hh:mm tt");
         if (voterDt.Rows.Count == 2)
         {
             ((Label)e.Item.FindControl("LBLfpname")).Text = voterDt.Rows[0]["firstName"].ToString() + " " + voterDt.Rows[0]["lastName"].ToString() + ",";
             ((Label)e.Item.FindControl("LBLspname")).Text = voterDt.Rows[1]["firstName"].ToString() + " " + voterDt.Rows[1]["lastName"].ToString();
-            ((LinkButton)e.Item.FindControl("LBmore")).Visible = false;
         }
         else if (voterDt.Rows.Count == 1)
         {
             ((Label)e.Item.FindControl("LBLfpname")).Text = voterDt.Rows[0]["firstName"].ToString() + " " + voterDt.Rows[0]["lastName"].ToString();
-            ((LinkButton)e.Item.FindControl("LBmore")).Visible = false;
         }
         else if (voterDt.Rows.Count > 2)
         {
             ((Label)e.Item.FindControl("LBLfpname")).Text = voterDt.Rows[0]["firstName"].ToString() + " " + voterDt.Rows[0]["lastName"].ToString() + ",";
             ((Label)e.Item.FindControl("LBLspname")).Text = voterDt.Rows[1]["firstName"].ToString() + " " + voterDt.Rows[1]["lastName"].ToString() + " and ";
+            ((LinkButton)e.Item.FindControl("LBmore")).Text = (Convert.ToUInt64(dt.Rows[0]["voteCount"])-2).ToString()+" "+"more.." ;
             ((LinkButton)e.Item.FindControl("LBmore")).Visible = true;
+            ((Panel)e.Item.FindControl("PopupMenu")).Visible = true;
+            Label lblvotersName = (Label)e.Item.FindControl("votersName");
+            lblvotersName.Text = "";
+            voterDt.Rows.RemoveAt(0);
+            voterDt.Rows.RemoveAt(0);
+            foreach (DataRow dr in voterDt.Rows)
+            {
+                lblvotersName.Text += dr["firstName"].ToString() + " " + dr["lastName"].ToString() + "<br/>";
+            }
 
         }
         else
         {
             ((Label)e.Item.FindControl("LBLfpname")).Text = "(None) Be first to vote it";
-            ((LinkButton)e.Item.FindControl("LBmore")).Visible = false;
         }
         ((Label)e.Item.FindControl("LBLIssue")).Text = dt.Rows[0]["issueText"].ToString();
        
@@ -230,12 +265,23 @@ public partial class Homepage : System.Web.UI.Page
         ((LinkButton)e.Item.FindControl("LBdeny")).CommandArgument = issueId.Value;
         ((LinkButton)e.Item.FindControl("LBcomment")).CommandArgument = issueId.Value;
         ((Button)e.Item.FindControl("btnPost")).CommandArgument = issueId.Value;
+        ((LinkButton)e.Item.FindControl("Report_Abuse")).CommandArgument = issueId.Value;
+        ((LinkButton)e.Item.FindControl("LBmore")).Enabled = false;
+        
         ///***** Counts values *****/
         //((Label)e.Item.FindControl("LBLvoteCount")).Text = dt.Rows[0]["voteCount"].ToString();
         ((Label)e.Item.FindControl("LBLsupportCount")).Text = dt.Rows[0]["supportCount"].ToString();
         ((Label)e.Item.FindControl("LBLdenyCount")).Text = dt.Rows[0]["denyCount"].ToString();
         ((Label)e.Item.FindControl("LBLcommentCount")).Text = dt.Rows[0]["commentCount"].ToString();
-        
+
+        ///***** Report check ****/
+        if (Convert.ToBoolean(dt.Rows[0]["reportAbuse"]) == false)
+            ((Image)e.Item.FindControl("IMG_Report")).ImageUrl = "../images/flag-black.png";
+        else
+        {
+            ((Image)e.Item.FindControl("IMG_Report")).ImageUrl = "../images/flag-red.png";
+            ((LinkButton)e.Item.FindControl("Report_Abuse")).Enabled = false;
+        }
         ///*** post link button ***/
         //((LinkButton)e.Item.FindControl("btnpost")).CommandArgument = issueId.Value;
         ((Repeater)e.Item.FindControl("ListComments")).DataSource =(DataTable)commentbal.getComments(Convert.ToInt64(issueId.Value));
@@ -261,8 +307,7 @@ public partial class Homepage : System.Web.UI.Page
                 supportdenybo.guid = int.Parse(Session["guid"].ToString());  /** from session **/
                 supportdenybo.issueId = issueId;
                 supportdenybo.supportDeny = true;
-                supportdenybal.updateData(supportdenybo);
-                DataTable dt = issuesbal.getIssue(issueId);
+                DataTable dt = supportdenybal.updateData(supportdenybo);
                 ((Label)e.Item.FindControl("LBLsupportCount")).Text = dt.Rows[0]["supportCount"].ToString();
                 ((Label)e.Item.FindControl("LBLdenyCount")).Text = dt.Rows[0]["denyCount"].ToString();
             }
@@ -271,11 +316,16 @@ public partial class Homepage : System.Web.UI.Page
                 supportdenybo.guid = int.Parse(Session["guid"].ToString()); ; /** from session **/
                 supportdenybo.issueId = issueId;
                 supportdenybo.supportDeny = false;
-                supportdenybal.updateData(supportdenybo);
-                DataTable dt = issuesbal.getIssue(issueId);
+                DataTable dt = supportdenybal.updateData(supportdenybo);
                 ((Label)e.Item.FindControl("LBLsupportCount")).Text = dt.Rows[0]["supportCount"].ToString();
                 ((Label)e.Item.FindControl("LBLdenyCount")).Text = dt.Rows[0]["denyCount"].ToString();
 
+            }
+            else if (btncmdname == "report")
+            {
+                reportbal.Issue_Report(issueId);
+                ((Image)e.Item.FindControl("IMG_Report")).ImageUrl = "../images/flag-red.png";
+                ((LinkButton)e.Item.FindControl("Report_Abuse")).Enabled = false;
             }
             else if (btncmdname == "post")
             {
@@ -292,6 +342,9 @@ public partial class Homepage : System.Web.UI.Page
                     ((Repeater)e.Item.FindControl("ListComments")).DataBind();
                 }
              }
+            else if (btncmdname == "more")
+            {
+            }
         }
         catch
         {
@@ -311,12 +364,19 @@ public partial class Homepage : System.Web.UI.Page
         HiddenField commentId = (HiddenField)e.Item.FindControl("HFcommentId");
         ((LinkButton)e.Item.FindControl("LBlike")).CommandArgument = commentId.Value;
         ((LinkButton)e.Item.FindControl("LBdislike")).CommandArgument = commentId.Value;
+        ((LinkButton)e.Item.FindControl("Report_Abuse_Comment")).CommandArgument = commentId.Value;
         DataTable dt = new DataTable();
         dt = (DataTable)commentbal.getComment(Convert.ToInt64(commentId.Value));
         ((Label)e.Item.FindControl("LBLlikeCount")).Text = dt.Rows[0]["likeCount"].ToString();
         ((Label)e.Item.FindControl("LBLdislikeCount")).Text = dt.Rows[0]["dislikeCount"].ToString();
-
-    }
+        if (Convert.ToBoolean(dt.Rows[0]["reportAbuse"]) == false)
+            ((Image)e.Item.FindControl("IMG_ReportComment")).ImageUrl = "../images/flag-black.png";
+        else
+        {
+            ((Image)e.Item.FindControl("IMG_ReportComment")).ImageUrl = "../images/flag-red.png";
+            ((LinkButton)e.Item.FindControl("Report_Abuse_Comment")).Enabled = false;
+        }
+       }
     protected void ListComments_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
         likeDislikeBo likedislikebo = new likeDislikeBo();
@@ -330,28 +390,31 @@ public partial class Homepage : System.Web.UI.Page
                 likedislikebo.guId = int.Parse(Session["guid"].ToString()); /*** from session ***/
                 likedislikebo.commentId = commentId;
                 likedislikebo.likeDislike = true;
-                likedislikebal.updateData(likedislikebo);
-                DataTable dt = new DataTable();
-                dt = (DataTable)commentbal.getComment(commentId);
+                DataTable dt = likedislikebal.updateData(likedislikebo);
                 ((Label)e.Item.FindControl("LBLlikeCount")).Text = dt.Rows[0]["likeCount"].ToString();
                 ((Label)e.Item.FindControl("LBLdislikeCount")).Text = dt.Rows[0]["dislikeCount"].ToString();
 
             }
-            if (btncmdname == "dislike")
+            else if (btncmdname == "dislike")
             {
                 likedislikebo.guId = int.Parse(Session["guid"].ToString());
                 likedislikebo.commentId = commentId;
                 likedislikebo.likeDislike = false;
-                likedislikebal.updateData(likedislikebo);
-                DataTable dt = new DataTable();
-                dt = (DataTable)commentbal.getComment(commentId);
+                DataTable dt = (DataTable)likedislikebal.updateData(likedislikebo);
                 ((Label)e.Item.FindControl("LBLlikeCount")).Text = dt.Rows[0]["likeCount"].ToString();
                 ((Label)e.Item.FindControl("LBLdislikeCount")).Text = dt.Rows[0]["dislikeCount"].ToString();
 
-
+            }
+            else if (btncmdname == "reportcomment")
+            {
+                reportbal.Comment_Report(commentId);
+                ((Image)e.Item.FindControl("IMG_ReportComment")).ImageUrl = "../images/flag-red.png";
+                ((LinkButton)e.Item.FindControl("Report_Abuse_Comment")).Enabled = false;
             }
 
-
+            else
+            {
+            }
         }
         catch
         {

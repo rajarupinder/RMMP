@@ -4,24 +4,23 @@ using System.Linq;
 using System.Web;
 using System.Data;
 
-
 /// <summary>
-/// Summary description for LikeDislikeBAL
+/// Summary description for ratingBAL
 /// </summary>
-public class LikeDislikeBAL
+public class ratingBAL
 {
-    LikeDislikeDAL likedislikedal = new LikeDislikeDAL();
-	public LikeDislikeBAL()
+    private ratingDAL ratingdal = new ratingDAL();
+	public ratingBAL()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
-    public DataTable updateData(likeDislikeBo likedislikebo)
+    public DataTable getrating(Int64 mpId, Int16 paramId=0, Int64 guId=0, Int16 rating=0)
     {
         try
         {
-            return likedislikedal.updateData(likedislikebo);
+            return ratingdal.getRating(mpId,paramId,guId, rating);
         }
         catch
         {
@@ -29,7 +28,7 @@ public class LikeDislikeBAL
         }
         finally
         {
-        }
 
+        }
     }
 }

@@ -38,11 +38,12 @@ body
 }
 /*main left start */
 #main_left
-{
+{     
+     
 	float:left;
 	width:25%;/*28*/
-	padding:3px 10px 3px 10px;
-	min-height:670px;
+	padding:3px 10px 3px 0px;
+	min-height:600px;
 	position:fixed;
 	border-right: 1px solid #CCC;
 }
@@ -53,6 +54,8 @@ body
 	text-align:center;
 	border-bottom:1px solid #CCC;
 	margin-top: 19px;
+    z-index:0;
+	/*border-right:1px solid #ccc;*/
 }
 .search_bar
 {
@@ -95,10 +98,11 @@ text-shadow: 0px 0px 1px #003;
 }
 .main_left_links
 {
-	float:left;
-	width:100%;
-	position:absolute;
-	bottom:48px;
+	float: left;
+	width: 70%;
+	position: fixed;
+	bottom: 0px;
+
 }
 .nav_inner
 {
@@ -131,15 +135,16 @@ text-shadow: 0px 0px 1px #003;
     position: relative;
     width: 72.5%;
     padding: 10px;
-    min-height: 670px;
-    /*border-left: 1px solid #CCC; */
+    /*min-height: 670px;*/
+	height:auto;
+    border-left: 1px solid #CCC; 
     right: 0;
 }
 #home_container
 { /* my csss for scroll bar.*/
 	float:right; /* left*/
 	width:72.7%; /*100*/
-	min-height:156px;
+	min-height:184px;
 	position:fixed; 
 	top:0px;
 	border-bottom:1px solid#CCC;
@@ -178,10 +183,11 @@ text-shadow: 0px 0px 1px #003;
 }
 .search_box
 {
-	float:left;
-	width:98%;
-	position:relative;
-	text-align:center;
+	float: left;
+	width: 92%;
+	position: relative;
+	text-align: center;
+	margin-top: 27px;
 }
 .search_box .seach_box_inner
 {
@@ -199,7 +205,7 @@ text-shadow: 0px 0px 1px #003;
     float: right;
 	height:600px;
 	margin-left: 8px;
-    margin-top:141px;
+    margin-top:172px;
 	
 	/*overflow-y:scroll; */
 	position:relative;
@@ -231,7 +237,7 @@ text-shadow: 0px 0px 1px #003;
 {
 	float:left;
 	width:100%;
-    background:#f0f0f0;
+    background:#FAFAFA;
     border:1px solid #ccc;
 	margin-top:10px;
 }
@@ -317,7 +323,7 @@ text-shadow: 0px 0px 1px #003;
 .bound1
 {
 	float:left;
-	width:26%;
+	width:24%;
 	padding-left:4%;
 }
 .bound1 i
@@ -347,7 +353,10 @@ text-shadow: 0px 0px 1px #003;
 	float:left;
 	width:10%;
 }
-
+.flag {
+    float: left;
+width: 15%
+}
 .comment_cont
 {
 	float: right;
@@ -411,6 +420,14 @@ text-shadow: 0px 0px 1px #003;
 	margin-top: 4px;
 	margin-left: 48px;
 }
+.mg-right3 
+{
+    margin-right:3px;
+}
+.mg-left3
+{
+    margin-left:3px;
+}
 .text_comment
 {
 	float:left;
@@ -472,10 +489,13 @@ text-shadow: 0px 0px 1px #003;
 
 .mp_info
 {
-	height: 500px;
-	width: 100%;
+	height:450px;
+	width:99%;
 	float: left;
 	margin-top: 1px;
+    z-index:1;
+    background-color:#fff;
+	/*border-right:1px solid #ccc;*/
 }
 .mp_info_inner
 {
@@ -491,7 +511,7 @@ text-shadow: 0px 0px 1px #003;
 	
 	/*height:125px;*/
 	width:33%;
-	padding:2px;
+	padding:0px;
 }
 
 .mp_img img
@@ -530,12 +550,12 @@ text-shadow: 0px 0px 1px #003;
 }
 .up_labels h5
 {
-	float:left;
-	width:38%;/*51*/
-	margin-left: 12px;
-	font-size:13px;
+	float: left;
+	width: 41%;
+	margin-left: 6px;
+	font-size: 13px;
 	font-weight: normal;
-	margin-top:0px;
+	margin-top: 0px
 }
 .up_labels label
 {
@@ -544,7 +564,7 @@ text-shadow: 0px 0px 1px #003;
 	width:40%;
 	font-size:12px; */
 	float: left;
-    font-size: 12px;
+    font-size: 11px;
     margin-top: 0px; /*10*/
     width: 56%;
 	
@@ -552,18 +572,18 @@ text-shadow: 0px 0px 1px #003;
 .down_labels
 {
 	float: left;
-	height: 285px;
+	height: 250px;
 	width: 98%;
 	margin-top: 41px;
 }
 .down_labels h5
 {
-	float:left;
-	width:39%;
-	margin-left: 10px;
-	margin-top:0px;
+	float: left;
+	width: 44%;
+	margin-left: 5px;
+	margin-top: 0px;
 	font-weight: normal;
-	font-size:13px;
+	font-size: 13px;
 	margin-bottom: 0px;
 	
 
@@ -573,7 +593,7 @@ text-shadow: 0px 0px 1px #003;
 	float:left;
 	margin-top:0px;
 	width:52%;
-	font-size: 12px;
+	font-size: 11px;
 	
 }
 .solve_issue_container
@@ -617,7 +637,7 @@ text-shadow: 0px 0px 1px #003;
 {
 	float:left;
 	width:100%;
-	height:72px;
+	height:77px;
 }
 
 
@@ -643,11 +663,11 @@ text-shadow: 0px 0px 1px #003;
 }
 .text_editor_container
 {
-	width: 74%;
+	width: 65%;
 	float: left;
-	margin-top: 5px;
-	margin-left: 64px;
-	margin-bottom: 20px;
+	margin-top: 38px;
+	margin-left: 18px;
+	margin-bottom: 5px;
 }
 .txteditor
 {
@@ -658,6 +678,7 @@ text-shadow: 0px 0px 1px #003;
 {
 	padding:2px;
 	width:68px;
+    margin-top:40px;
 }
 .img_1
 {
@@ -671,3 +692,432 @@ text-shadow: 0px 0px 1px #003;
 
 
 /*main right end */
+
+
+/* Rating */
+.rating
+{
+	float:left;
+	width:100%;
+	height:auto;
+	margin-top: 5px;
+	/*border-right:1px solid #ccc;*/
+}
+.rating_heading 
+{
+	height: 20px;
+	width: 100%;
+	float: left;
+	text-align: center;
+	font-weight: normal;
+	margin-bottom: 19px;
+	margin-top: 22px;
+}
+
+.rating_heading h4
+{
+	float: left;
+	width: 100%;
+	font-size: 18px;
+	color: #003;
+}
+.heading_inner 
+{
+    float:left;
+    width:100%;
+}
+.heading_inner h6
+{
+    float: right;
+    width: 26%;
+    padding-left: 34px;
+
+}
+.rating_inner 
+{
+	float: left;
+	width: 100%;
+	margin-bottom:20px;
+}
+.rating_inner 
+{
+	float:left;
+	width:100%;
+	
+
+}
+.rating_inner_1 
+{
+	float:left;
+	width:100%;
+	height:40px;
+}
+.icon-heart
+{
+	float:left;
+	width:10%;
+	height:30px; margin-left:7px;
+
+}
+#Label11
+{
+	float: left;
+	/*margin-top: 42px;*/
+	margin-left: 10px; 
+	font-size: 12px;
+	font-family: sans-serif;
+	
+}
+#Label22
+{
+	float: left;
+	/*margin-top: 42px;
+	margin-left: 188px;*/
+	margin-left: 10px;
+	font-size: 12px;
+	font-family: sans-serif;
+	
+}
+#Label33
+{
+	float: left;
+	/*margin-top: 42px;
+	margin-left: 188px;*/
+	margin-left: 10px;
+	font-size: 12px;
+	font-family: sans-serif;
+	
+}
+
+
+.rating_star 
+{
+	float:left;
+	width:20%;
+	height:30px;
+    margin-right:5px;
+}
+.div_stars
+ {
+    float:left;
+    width:45%;
+	margin-top: 4px;
+	margin-left:19px;
+}
+.rating_avg 
+{
+	
+	height: 30px;
+}
+
+
+.ratingStar {
+    font-size: 0pt;
+    width: 13px;
+    height: 12px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+.filledRatingStar {
+    background-image: url(../Images/FilledStar.png);
+
+}
+
+.emptyRatingStar {
+    background-image: url(../Images/EmptyStar.png);
+}
+
+.savedRatingStar {
+    background-image: url(../Images/SavedStar.png);
+}
+
+/* rating ends*/
+
+/* Contact us--------our mission---------about us*/
+.main_header 
+{
+	
+	width:100%;
+	height:135px;
+	
+}
+.logo_1 
+{
+	float: left;
+	width: 40%;
+	margin-top: 10px;
+	margin-left: 44px;
+	text-align: left;
+}
+.main_header_right 
+{
+	float:left;
+	width:50%;
+	height:134px;
+	
+}
+.nav1{ margin-top:90px;padding: 0;}
+.nav1 li{ float:left; margin-right:106px; font-size:20px; display:inline; }
+.nav1 li a{ text-decoration:none; color:#666; font-weight:bold; }
+.nav1 li a:hover{ color:#000;}
+.nav1 li span{ float:left; margin-left:5px; margin-right:5px; 	}
+
+
+.transition
+{
+	transition:background ease-in 0.3s;
+}	
+.header
+{
+	float:left;
+	width:100%;
+	height:580px;
+	background:#202640;
+	border-radius: 17px 17px 17px 17px;
+}
+.header_1
+{    margin: 0 auto;
+	margin-top: 25px;
+	
+	width: 980px;
+	height: 580px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 15px 1px #ccc;
+	background: #fff;
+	border-radius: 20px;
+
+}
+
+.header_2
+{    margin: 0 auto;
+	margin-top: 25px;
+	
+	width: 980px;
+	height: 670px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 15px 1px #ccc;
+	background: #fff;
+	border-radius: 20px;
+
+}
+.highlight p
+{
+	float: left;
+	width: 88%;
+	margin-top: 5px;
+	margin-left: 109px;
+	padding: 30px;
+	font-family: inherit;
+}
+.message_box
+{
+	float:left;
+	width:63%;
+	height:550px;
+	background-color:#fff;
+	margin-top:15px;
+	margin-left:10px;
+	/*border-radius: 17px 17px 17px 17px;
+	border: 1px solid #ccc;
+	box-shadow: 0 0 15px 1px #ccc;*/
+}
+.name4
+{
+	float :left;
+	height:74px;
+	width:100%;
+	
+	margin-bottom:4px;
+}
+.text_box1
+{   float: right;
+	width: 27%;
+	height: 47px;
+	margin-right: 253px;
+	margin-top: 44px;
+}
+
+.email_id
+{
+    float :left;
+	height:74px;
+	width:100%;
+	
+}
+.contact
+ {
+	 float :left;
+	height:74px;
+	width:100%;
+}
+#Label1
+{
+	
+	float: left;
+	margin-top: 44px;
+	margin-left: 60px;
+	font-size: 18px;
+	font-family: Arial;
+}
+#Label2
+{
+	
+	float: left;
+	margin-top: 44px;
+	margin-left: 60px;
+	font-size: 18px;
+	font-family: Arial;
+	
+}
+#Label4
+{
+	float: left;
+	margin-top: 44px;
+	margin-left: 60px;
+	font-size: 18px;
+	font-family: Arial;
+	
+}
+#Label3
+{
+	
+	float: left;
+	margin-top: 44px;
+	margin-left: 60px;
+	font-size: 18px;
+	font-family: Arial;
+	
+}
+.message
+{
+	width: 100%;
+	height: 270px;
+	float: left;
+	margin-top: 10px;
+}
+.message_box1
+{
+	float: right;
+	height: 267px;
+	width: 50%;
+	margin-right: 106px;
+	margin-top: 32px;
+}
+.right_contact
+{
+	float: left;
+	height: 555px;
+	width: 34%;
+	background-color: #fff;
+	margin-top: 15px;
+	/*border-radius: 17px 17px 17px 17px;*/
+	border-left: 1px solid #ccc;
+	box-shadow: -14px 0 5px -12px #ccc;
+}
+.btn_send 
+{
+	float:left;
+	width:30%;
+	height:40px;
+	margin-left:33%;
+}
+#Button1_send 
+{
+	float:left;
+	padding:4px 12px 4px 12px;
+}
+.telephone_pic 
+{
+	float: left;
+	height: 218px;
+	width: 247px;
+	margin-left: 13px;
+}
+.about_us_data
+{
+	font-size: 17px;
+	font-family: Arial;
+	background-color: #EEE;
+	margin-top: 26px;
+	height: 252px;
+	float: left;
+	width: 94%;
+	margin-left: 59px;
+	
+}
+.p_data
+{
+	float:left;
+	height:300px;
+	width:100%;
+}
+.Abt_us
+{
+	float: left;
+	width: 99%;
+	height: 65px;
+	margin-top: 24px;
+	
+	border-bottom: 1px solid #ccc;
+}
+.fnt
+{
+	font-size: 30px;
+	font-family: Arial;
+	margin-top: 14px;
+	margin-left: 19px;
+	color: #fff;
+
+}
+.p1
+{
+	float: left;
+	width: 90%;
+	color: #fff;
+	margin-top: 28px;
+	font-size: 17px;
+	font-family: Arial;
+	margin-left: 35px;
+	margin-bottom: 35px;
+	
+
+}
+.p2
+{
+	float: left;
+	width: 90%;
+	margin-top: 44px;
+	font-size: 17px;
+	font-family: Arial;
+	margin-left: 35px;
+
+}
+.background_colr
+{
+	background-color: #202640;
+	float: left;
+	width:100%;
+	border-radius: 17px 17px 0px 0px;
+
+}
+/* Contact us--------our mission---------about us* end*/
+/* scroll down css-------- start*/
+.clear
+ { 
+    clear:both; 
+}
+#sticker
+ {
+	width: 327px;
+	float:left;
+}
+.stick 
+{
+    position:fixed;
+    top:0px;
+}
+/* scroll down css-------- end*/

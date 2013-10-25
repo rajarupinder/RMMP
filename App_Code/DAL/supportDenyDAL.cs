@@ -22,24 +22,27 @@ public class supportDenyDAL
 		// TODO: Add constructor logic here
 		//
 	}
-    public void updateData(supportDenyBO supportdenybo)
+    public DataTable updateData(supportDenyBO supportdenybo)
     {
         try
         {
 
-            query = "SUPPORT_DENY_CLICK";
+            query = "SUPPORT_DENY_CLICK1";
             if (con.State == ConnectionState.Closed)
             {
                 con.Open();
             }
-            cmd = new SqlCommand(query, con);
-           
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@issueId", supportdenybo.issueId);
-            cmd.Parameters.AddWithValue("@guid",supportdenybo.guid);
-            cmd.Parameters.AddWithValue("@supportDenyValue",supportdenybo.supportDeny);
-            cmd.ExecuteNonQuery();
-            
+
+            dap = new SqlDataAdapter(query,con);
+
+            dap.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dap.SelectCommand.Parameters.AddWithValue("@issueId", supportdenybo.issueId);
+            dap.SelectCommand.Parameters.AddWithValue("@guid", supportdenybo.guid);
+            dap.SelectCommand.Parameters.AddWithValue("@supportDenyValue", supportdenybo.supportDeny);
+            DataTable dt = new DataTable();
+            dap.Fill(dt);
+            return dt;
+
         }
         catch
         {
@@ -49,7 +52,37 @@ public class supportDenyDAL
         {
             if (con.State == ConnectionState.Open)
                 con.Close();
-            cmd.Dispose();
+            dap.Dispose();
         }
     }
+    //public void updateData(supportDenyBO supportdenybo)
+    //{
+    //    try
+    //    {
+
+    //        query = "SUPPORT_DENY_CLICK";
+    //        if (con.State == ConnectionState.Closed)
+    //        {
+    //            con.Open();
+    //        }
+    //        cmd = new SqlCommand(query, con);
+           
+    //        cmd.CommandType = CommandType.StoredProcedure;
+    //        cmd.Parameters.AddWithValue("@issueId", supportdenybo.issueId);
+    //        cmd.Parameters.AddWithValue("@guid",supportdenybo.guid);
+    //        cmd.Parameters.AddWithValue("@supportDenyValue",supportdenybo.supportDeny);
+    //        cmd.ExecuteNonQuery();
+            
+    //    }
+    //    catch
+    //    {
+    //        throw;
+    //    }
+    //    finally
+    //    {
+    //        if (con.State == ConnectionState.Open)
+    //            con.Close();
+    //        cmd.Dispose();
+    //    }
+    //}
 }

@@ -21,6 +21,37 @@ public class ConstituencyDAL
     SqlDataAdapter dap;
     string query;
 
+
+    public bool checkMpExistOrNot(Int16 constituencyId)
+    {
+        try
+        {
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            query = "checkMpExistOrNot";
+            cmd = new SqlCommand(query, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@constituencyId", constituencyId);
+            SqlParameter message = cmd.Parameters.Add("@res", SqlDbType.Bit);
+            message.Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            return (bool.Parse(message.Value.ToString()));
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+            }
+        }
+
+    }
     public bool constituencyInsert(constituencyBO constituencyB0)
     {
         try

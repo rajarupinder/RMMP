@@ -19,7 +19,7 @@
                  var party = $('#<%= DropDownparty.ClientID %>').val();
                  var electedYear = $('#<%= DropDownelectedYear.ClientID %>').val();
                  // additional
-                 var mname = $('#<%= middleName.ClientID %>').val();
+                // var mname = $('#<%= middleName.ClientID %>').val();
                  var qualification = $('#<%= qualification.ClientID %>').val();
                  var profession = $('#<%= profession.ClientID %>').val();
                  var perAdd = $('#<%= permanentAddress.ClientID %>').val();
@@ -29,7 +29,7 @@
                  var curDid = $('#<%= DropDowncurrentDistrict.ClientID %>').val();
                  var curSid = $('#<%= DropDowncurrentState.ClientID %>').val();
 
-                 if (fname == '' || lname == '' || email == '' || fupload == '' || country == 0 || state == 0 || constituency == 0 || party == 0 || electedYear == 0 || mname == '' || qualification == '' || profession == '' || perAdd == '' || perDid == 0 || perSid == 0 || curADD == '' || curDid == 0 || curSid == 0)
+                 if (fname == '' || lname == '' || email == '' || fupload == '' || country == 0 || state == 0 || constituency == 0 || party == 0 || electedYear == 0 || qualification == '' || profession == '' || perAdd == '' || perDid == 0 || perSid == 0 || curADD == '' || curDid == 0 || curSid == 0)
                  {
                      alert("please fill up all required field.");
                      return false;

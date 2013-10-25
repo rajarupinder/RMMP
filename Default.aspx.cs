@@ -74,6 +74,9 @@ public partial class _Default : System.Web.UI.Page
                     Session["fName"] = userdetails[2];
                     Session["socialType"] = "local";
                     Session["socialOrNot"] = 0; //HERE 0 MEANS LOCAL USER.
+                    // this is the code to preserve the password witn in postback
+                    string Password = signinPassword.Text;
+                    signinPassword.Attributes.Add("value", Password);
                     ClientScript.RegisterStartupScript(this.GetType(), "myfunction", "rightCredential()", true);
                 }
                 else

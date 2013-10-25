@@ -18,6 +18,22 @@ public class ConstituencyBAL
     public ConstituencyBAL()
     {
     }
+    public bool checkMpExistOrNot(Int16 constituencyId)
+    {
+        try
+        {
+            return ob.checkMpExistOrNot(constituencyId);
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+
+        }
+
+    }
 
     public bool constituencyInsert(constituencyBO constituencyBO)
     {

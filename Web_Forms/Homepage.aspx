@@ -54,7 +54,7 @@
            var fbl;
            window.fbAsyncInit = function () {
                fb1 = FB.init({
-                   appId: '421695167935164', // App ID 
+                   appId: '421695167935164', // final App ID 421695167935164
                    channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
                    status: true, // check login status  
                    cookie: true, // enable cookies to allow the server to access the session
@@ -88,18 +88,34 @@
                alert("Please select both state and constituency");
 
            }
+           function mpNotExist() {
+              
+                       var stateid = $('#<%=DDListState .ClientID %>').val();
+                       var constituencyid = $('#<%= DDListConstituency.ClientID %>').val();
+                       if(stateid==0 || constituencyid==0)
+                       {
+                           alert("Please select both state and constituency.");
+                           return false;
+                       }
+                       else 
+                       {
+                           return true;
 
+                       }
+
+           }
     </script>
     
 </head>
 <body>
     <form id="frmhomepage" runat="server">
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePartialRendering="true"/>
+   
 <div id="main"> 
 	<div id="main_container">
     	<div id="main_left">
         	<div class="logo">
-            	<a href="Homepage.aspx"><img src="../images/LOG.png" / class="img_1"></a>
+            	<a href="Homepage.aspx"><img src="../images/rmm-logo.png" / class="img_1"/></a>
             </div>
             <div class="search_bar">
             	<h3>Select a Member</h3>
@@ -109,8 +125,10 @@
                     </asp:DropDownList>
                 </div>
                 <div class="select_outr">
+                    <asp:Image ID="Image1"  Visible="false" runat="server" />
                 <asp:DropDownList ID="DDListConstituency" runat="server" CssClass="member_select">
                     </asp:DropDownList>
+
                 </div>
                </ContentTemplate></asp:UpdatePanel>
                 <asp:HiddenField ID="HFconstituencyId" runat="server" />
@@ -121,9 +139,9 @@
             </div>
             <div class="main_left_links">
             	<ul class="nav nav_inner">
-                	<li><a href="javascript:void(0);">About Us</a></li>
-                    <li><a href="javascript:void(0);">Our Mission</a></li>
-                    <li><a href="javascript:void(0);">Contact Us</a></li>
+                	<li><a href="aboutus.aspx">About Us</a></li>
+                    <li><a href="ourmission.aspx">Our Mission</a></li>
+                    <li><a href="contactus.aspx">Contact Us</a></li>
                 </ul>
             </div>
         </div>
@@ -169,12 +187,27 @@
                             <asp:Label ID="LBLdt" CssClass="date_time" runat="server" />
                         </div>
                         <asp:UpdatePanel runat="server" UpdateMode="Conditional"><ContentTemplate>  
-                            <div class="home_right_top">
+                           <div class="home_right_top">
                         	<p>Votes By</p>
                             <label><asp:Label ID="LBLfpname" runat="server"/></label>
                             <label><asp:Label ID="LBLspname" runat="server"/></label>
-                            <asp:LinkButton ID="LBmore" runat="server" Text="more.."/>
-                        </div>
+                            <asp:LinkButton ID="LBmore" runat="server" Text="more.." Visible="false" CommandName="more"/>
+                         </div>
+                            <asp:HoverMenuExtender ID="HoverMenuExtender1" runat="server"
+                                TargetControlID="LBmore"
+                                PopupControlID="PopupMenu"
+                                HoverCssClass="popupHover"
+                                PopupPosition="Right"
+                                OffsetX="0"
+                                OffsetY="0"
+                                PopDelay="50"
+                                
+                                 />
+                            <asp:Panel CssClass="popupMenu" style="background-color:black;color:white;padding:4px;" ID="PopupMenu"  runat="server" Visible="false">
+                              <asp:Label ID="votersName" runat="server" />
+                             </asp:Panel>
+                                
+                            
                         </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="LBmore" EventName="Click" />
@@ -191,6 +224,7 @@
                         <%--<i class="icon-thumbs-up"></i>--%> <img src="../images/up.png" class="pull-left mg-top5" /><label><asp:Label ID="LBLsupportCount" runat="server"/></label><asp:LinkButton ID="LBsupport" runat="server" Text="Support" CommandName="support"/>
                         <%--<i class="icon-thumbs-down"></i>--%><img src="../images/down.png" class="pull-left mg-top5" /><label><asp:Label ID="LBLdenyCount" runat="server"/></label><asp:LinkButton ID="LBdeny" runat="server" Text="Deny" CommandName="deny"/>
                         <%--<i class="icon-comment"></i>--%><img src="../images/comment.png" class="pull-left mg-top5" /><label><asp:Label ID="LBLcommentCount" runat="server"/></label>
+                            
                         </div>
                            </ContentTemplate>
                             <Triggers>
@@ -201,6 +235,15 @@
                             <div class="bound2">
                                 <asp:LinkButton ID="LBcomment" runat="server" Text="Comment"/>
                             </div>
+                             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional"><ContentTemplate>
+                        <div class="flag">
+                            <asp:Image ID="IMG_Report" runat="server" CssClass="pull-left mg-top5" />
+
+                            <asp:LinkButton ID="Report_Abuse" runat="server" CommandName="report" Text="Report Abuse" />
+                        </div>
+                       </ContentTemplate><Triggers>
+                           <asp:AsyncPostBackTrigger ControlID="Report_Abuse" EventName="Click" />
+                                         </Triggers></asp:UpdatePanel>
                         </div>
                        
 
@@ -228,14 +271,21 @@
                     <asp:HiddenField runat="server" ID="HFcommentId" Value='<%# DataBinder.Eval(Container.DataItem,"commentId") %>' />
                      <asp:UpdatePanel runat="server" UpdateMode="Conditional"><ContentTemplate>
                         <div class="sub_icons"> 
-                               <%--<i class="icon icon-thumbs-up"></i>--%> <img src="../images/up.png" class="pull-left mg-top5" /><asp:Label runat="server" ID="LBLlikeCount"/><asp:LinkButton ID="LBlike" runat="server" Text="Like" CommandName="like"/> 
-                               <%--<i class="icon icon-thumbs-down"></i>--%><img src="../images/down.png" class="mg-top5" /><asp:Label runat="server" ID="LBLdislikeCount"/> <asp:LinkButton ID="LBdislike" runat="server" Text="Dislike" CommandName="dislike"/>
+                               <%--<i class="icon icon-thumbs-up"></i>--%> <img src="../images/up.png" class="pull-left mg-top5" /><asp:Label runat="server" ID="LBLlikeCount"/><asp:LinkButton ID="LBlike" class="mg-left3" runat="server" Text="Like" CommandName="like"/> 
+                               <%--<i class="icon icon-thumbs-down"></i>--%><img src="../images/down.png" class="mg-right3" /><asp:Label runat="server" ID="LBLdislikeCount"/> <asp:LinkButton ID="LBdislike" runat="server" Text="Dislike" CommandName="dislike"/>
+                               
+                            <%--<img src="../images/flag-black.png" /><asp:LinkButton ID="LinkButton1" class="mg-left3" runat="server">Report Abuse</asp:LinkButton>--%>
+                            <asp:Image ID="IMG_ReportComment" runat="server"/>
+                            <asp:LinkButton ID="Report_Abuse_Comment" runat="server" CommandName="reportcomment" Text="Report Abuse" class="mg-left3" />
+                    
+                       
                         </div>
                     </ContentTemplate>
                          <Triggers>
                              <asp:AsyncPostBackTrigger ControlID="LBlike" EventName="Click" />
                              <asp:AsyncPostBackTrigger ControlID="LBdislike" EventName="Click" />
                             <asp:AsyncPostBackTrigger ControlID="btnPost" EventName="Click" />
+                             <asp:AsyncPostBackTrigger ControlID="Report_Abuse_Comment" EventName="Click" />
                          </Triggers>
                      </asp:UpdatePanel>
                    </ItemTemplate></asp:Repeater> 

@@ -16,6 +16,31 @@ public class mpDetailsDAL
 	{
         //constructor
 	}
+    public DataTable fetchMPBasedOnStateorConstituency(countryBO CountryBO, stateBO StateBO, constituencyBO constituencyBO)
+    {
+        try
+        {
+
+            dap = new SqlDataAdapter("fetchMPBasedOnStateorConstituency", con);
+            dap.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dap.SelectCommand.Parameters.AddWithValue("@countryId", CountryBO.countryId);
+            dap.SelectCommand.Parameters.AddWithValue("@stateId", StateBO.stateId);
+            dap.SelectCommand.Parameters.AddWithValue("@constituencyId", constituencyBO.constituencyId);
+            DataSet ds = new DataSet();
+            dap.Fill(ds, "tblMpDetails");
+            dap.Dispose();
+            return ds.Tables["tblMpDetails"];
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        {
+            con.Close();
+        }
+
+    }
     public DataTable getData(Int16 constituencyId)
     {
         try

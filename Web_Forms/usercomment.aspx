@@ -6,17 +6,34 @@
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
+ <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Rate my MP</title>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
-<link type="text/css" rel="stylesheet" href="../css/jquery-te-1.4.0.css"/>
+<link type="text/css" rel="stylesheet" href="../CSS/jquery-te-1.4.0.css"/>
 <link rel="stylesheet" type="text/css" href="../css/style1.css" />
 <script type="text/javascript" src="../js/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="../JS/jquery.js" charset="utf-8"></script>
 <script type="text/javascript" src="../js/jquery-te-1.4.0.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
+ <script type="text/javascript"> 
+   $(document).ready(function () {
+     var s = $("#sticker");
+     var pos = s.position();
+     $(window).scroll(function () {
+         var windowpos = $(window).scrollTop();
+         //s.html("Distance from top:" + pos.top + "<br />Scroll position: " + windowpos);
+         if (windowpos >= pos.top) {
+             s.addClass("stick");
+         } else {
+             s.removeClass("stick");
+         }
+     });
+ });
+
+ </script>
 
 
       <!-- script to logout from  google session  -->
@@ -47,7 +64,7 @@
            var fbl;
            window.fbAsyncInit = function () {
                fb1 = FB.init({
-                   appId: '421695167935164', // App ID 
+                   appId: '421695167935164', //  final App ID  421695167935164
                    channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
                    status: true, // check login status  
                    cookie: true, // enable cookies to allow the server to access the session
@@ -92,7 +109,6 @@
              }
              else {
                  return true;
-
          }
          }
      </script>
@@ -100,12 +116,18 @@
 <body>
     <form id="frmusercomment" runat="server" class="formtag"  >
         <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePartialRendering="true"/>
-<div id="main"> 	<div id="main_container">
+
+<div id="main"> 	
+    <div id="main_container">
+
     	<div id="main_left">
-        	<div class="logo">
-               <a href="Homepage.aspx"><img src="../images/LOG.png" / class="img_1"></a>
+         <div class="logo">
+               <a href="Homepage.aspx"><img src="../images/rmm-logo.png"  class="img_1"/></a>
             </div>
-         <div class="mp_info">
+          
+            <div id="sticker">
+          
+          <div class="mp_info">
           <div class="heading">
                		<h5>15th Lok Sabha <br />Member of Parliament profile</h5>
                </div>
@@ -147,17 +169,106 @@
                <div class="name2">
              <h5>Present Address:</h5><label><asp:Label ID="lblpresent_address" runat="server" /></label>
              </div>
+
           </div>
+                
+                  
+                 </div>
+                <div class="rating">
+              <div class="rating_heading">
+                    <h4>Rating</h4>
+                </div>
+                    <div class="heading_inner">
+            <h6>Avg Rating</h6>
+           <h6>Your Rating</h6>
+           
+
        </div>
-             <%--<div class="main_left_links">
+                  <div class="rating_inner">
+                      <div class="rating_inner_1">
+                         <div class="icon-heart">
+                             <asp:Image ID="Imag" runat="server" ImageUrl="~/images/heart.png"/>
+                        </div>
+                      <div class="rating_star">
+                            <asp:Label ID="Label11" runat="server" Text="Health"/>
+                      </div>
+                          <asp:UpdatePanel ID="UpdatePanel7"  runat="server" UpdateMode="Conditional"><ContentTemplate>
+                          <div class="div_stars">
+                              <asp:Rating ID="Rating1" runat="server" CurrentRating="0" MaxRating="5" StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
+                                 FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" OnChanged="Rating1_Changed" AutoPostBack="true" />
+                          </div>
+
+                           <div class="rating_avg">
+                             <asp:Label ID="LBLrating1" runat="server" Text="0"/>
+                           </div>
+                        </ContentTemplate>
+                              <Triggers>
+                                  <asp:AsyncPostBackTrigger ControlID="Rating1" />
+                              </Triggers>
+                          </asp:UpdatePanel>
+                  </div>
+                      <div class="rating_inner_1">
+                          <div class="icon-heart">
+                             <asp:Image ID="Image2" runat="server" ImageUrl="~/images/education.png" />
+                         </div>
+                     <div class="rating_star">
+                         <asp:Label ID="Label22"  runat="server" Text="Education"/>
+                     </div>
+                          <asp:UpdatePanel ID="UpdatePanel8" runat="server" UpdateMode="Conditional"><ContentTemplate>
+                          <div class="div_stars">
+                              <asp:Rating ID="Rating2" runat="server" CurrentRating="0" MaxRating="5" StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
+                                 FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" OnChanged="Rating2_Changed" AutoPostBack="true"  />
+                          </div>
+                          <div class="rating_avg">
+                              <asp:Label ID="LBLrating2" runat="server" Text="0"/>
+                          </div>
+                          </ContentTemplate>
+                              <Triggers>
+                                  <asp:AsyncPostBackTrigger ControlID="Rating2" />
+                              </Triggers>
+                          </asp:UpdatePanel>
+                   </div>
+                       <div class="rating_inner_1">
+                          <div class="icon-heart">
+                             <asp:Image ID="Image3" runat="server" ImageUrl="~/images/infrastructure.png" />
+                         </div>
+                     <div class="rating_star">
+                          <asp:Label ID="Label33" runat="server" Text="Infrastructure"/>
+                     </div>
+                           <asp:UpdatePanel ID="UpdatePanel9" runat="server" UpdateMode="Conditional"><ContentTemplate>
+                           <div class="div_stars">
+                              <asp:Rating ID="Rating3" runat="server" CurrentRating="0" MaxRating="5" StarCssClass="ratingStar" WaitingStarCssClass="savedRatingStar"
+                                 FilledStarCssClass="filledRatingStar" EmptyStarCssClass="emptyRatingStar" OnChanged="Rating3_Changed" AutoPostBack="true"    />
+                          </div>
+                          <div class="rating_avg">
+                            <asp:Label ID="LBLrating3" runat="server" Text="0"/>
+                           </div>
+                           </ContentTemplate>
+                              <Triggers>
+                                  <asp:AsyncPostBackTrigger ControlID="Rating3" />
+                              </Triggers>
+                          </asp:UpdatePanel>
+                   </div>
+
+                  </div>
+                 <div class="clear"></div>
+                          </div>
+                    
+            </div>
+             
+                </div>
+
+             
+            
+            <%--<div class="main_left_links">
             	<ul class="nav nav_inner">
                 	<li><a href="javascript:void(0);">About Us</a></li>
                     <li><a href="javascript:void(0);">Our Mission</a></li>
                     <li><a href="javascript:void(0);">Contact Us</a></li>
                 </ul>
             </div>--%>
-         </div>
-           <div id="main_right">
+           
+        <div id="main_right">
             <div id="home_container">
             	<div class="home_right">
                 	<label  class="user_outr"> <asp:Label ID="LBLuserName" runat="server" Text="Label"></asp:Label></label>
@@ -175,7 +286,30 @@
                     <div class="text_editor_outr">
                     
                 	<%--<textarea name="textarea" class="jqte-test"></textarea>--%>
-                    <asp:TextBox ID="TXTissue" runat="server" CssClass=" txteditor " TextMode="MultiLine" PlaceHolder="Post Issue Here"/>
+                    <asp:TextBox ID="TXTissue" runat="server" CssClass=" txteditor " TextMode="MultiLine" PlaceHolder="Post Issue Here" Height="100px"/>
+                        <asp:HtmlEditorExtender ID="HtmlEditorExtender1" runat="server" TargetControlID="TXTissue" EnableSanitization="false">
+                          <Toolbar> 
+                            <asp:Undo />
+                            <asp:Redo />
+                            <asp:Bold />
+                            <asp:Italic />
+                            <asp:Underline />
+                            <asp:StrikeThrough />
+                            <asp:Subscript />
+                            <asp:Superscript />
+                            <asp:JustifyLeft />
+                            <asp:JustifyCenter />
+                            <asp:JustifyRight />
+                            <asp:JustifyFull />
+                            <asp:RemoveFormat />
+                            <asp:Cut />
+                            <asp:Copy />
+                            <asp:Paste />
+                            <asp:ForeColorSelector />
+                            <asp:FontNameSelector />
+                            <asp:FontSizeSelector />
+                        </Toolbar>
+                        </asp:HtmlEditorExtender>
                 </div>
                        <div class="attach_file">
                     <asp:Button ID="BTNissuePost" runat="server" Text="Post" OnClick="BTNissuePost_Click" />
@@ -188,7 +322,10 @@
                 </asp:UpdatePanel>
                 </div>
               </div>
+              
                
+                  
+                
                  <%-- Issues start--%>
              <div class="random_issue">
  <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional"><ContentTemplate>
@@ -208,8 +345,21 @@
                         	<p>Votes By</p>
                             <label><asp:Label ID="LBLfpname" runat="server"/></label>
                             <label><asp:Label ID="LBLspname" runat="server"/></label>
-                            <asp:LinkButton ID="LBmore" runat="server" Text="more.."/>
+                            <asp:LinkButton ID="LBmore" runat="server" Text="more.." Visible="false" CommandName="more" />
                         </div>
+                             <asp:HoverMenuExtender ID="HoverMenuExtender1" runat="server"
+                                TargetControlID="LBmore"
+                                PopupControlID="PopupMenu"
+                                HoverCssClass="popupHover"
+                                PopupPosition="Right"
+                                OffsetX="0"
+                                OffsetY="0"
+                                PopDelay="50"
+                                 />
+                             
+                            <asp:Panel CssClass="popupMenu" style="background-color:black;color:white;padding:4px;" ID="PopupMenu"  runat="server" Visible="false">
+                              <asp:Label ID="votersName" runat="server" />
+                             </asp:Panel>
                         </ContentTemplate>
                             <Triggers>
                                 <asp:AsyncPostBackTrigger ControlID="LBmore" EventName="Click" />
@@ -237,8 +387,15 @@
                             <div class="bound2">
                                 <asp:LinkButton ID="LBcomment" runat="server" Text="Comment"/>
                             </div>
+                        <asp:UpdatePanel runat="server" UpdateMode="Conditional"><ContentTemplate>
+                        <div class="flag">
+                            <asp:Image ID="IMG_Report" runat="server" CssClass="pull-left mg-top5" />
+
+                            <asp:LinkButton ID="Report_Abuse" runat="server" CommandName="report" Text="Report Abuse" />
                         </div>
-                       
+                       </ContentTemplate><Triggers>
+                           <asp:AsyncPostBackTrigger ControlID="Report_Abuse" EventName="Click" />
+                                         </Triggers></asp:UpdatePanel>
 
                     </div>
     <%-- Comments start--%>              
@@ -266,12 +423,15 @@
                         <div class="sub_icons"> 
                                <%--<i class="icon icon-thumbs-up"></i>--%><img src="../images/up.png" class="pull-left mg-top5" /><asp:Label runat="server" ID="LBLlikeCount"/><asp:LinkButton ID="LBlike" runat="server" Text="Like" CommandName="like"/> 
                                <%--<i class="icon icon-thumbs-down"></i>--%><img src="../images/down.png" class="mg-top5" /><asp:Label runat="server" ID="LBLdislikeCount"/> <asp:LinkButton ID="LBdislike" runat="server" Text="Dislike" CommandName="dislike"/>
+                            <asp:Image ID="IMG_ReportComment" runat="server"/>
+                            <asp:LinkButton ID="Report_Abuse_Comment" runat="server" CommandName="reportcomment" Text="Report Abuse" class="mg-left3" />
                         </div>
                     </ContentTemplate>
                          <Triggers>
                              <asp:AsyncPostBackTrigger ControlID="LBlike" EventName="Click" />
                              <asp:AsyncPostBackTrigger ControlID="LBdislike" EventName="Click" />
                             <asp:AsyncPostBackTrigger ControlID="btnPost" EventName="Click" />
+                              <asp:AsyncPostBackTrigger ControlID="Report_Abuse_Comment" EventName="Click" />
                          </Triggers>
                      </asp:UpdatePanel>
                    </ItemTemplate></asp:Repeater> 
@@ -317,7 +477,8 @@
 </div>
   
   
-<script>
+
+    <script>
     $('.jqte-test').jqte();
 
     // settings of status
@@ -327,6 +488,7 @@
         $('.jqte-test').jqte({ "status": jqteStatus })
     });
 </script>
+        
     </form>
 </body>
 

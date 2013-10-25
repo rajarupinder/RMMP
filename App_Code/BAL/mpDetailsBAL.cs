@@ -12,6 +12,19 @@ public class mpDetailsBAL
 	{
         //constructor
 	}
+    public DataTable fetchMPBasedOnStateorConstituency(countryBO CountryBO, stateBO StateBO, constituencyBO constituencyBO)
+    {
+        try
+        {
+            return mpDetailsDAL.fetchMPBasedOnStateorConstituency(CountryBO, StateBO, constituencyBO);
+        }
+        catch
+        {
+            throw;
+        }
+        finally
+        { }
+    }
     public DataTable getData(Int16 constituencyId)
     {
         try

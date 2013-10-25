@@ -32,7 +32,10 @@
                 <a href="addState.aspx"> <div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add State</div></a>
                 <a href="addDistrict.aspx"><div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add District</div></a>
                 <a href="addParty.aspx"> <div class="buttons"><img src="../images/admin/icon-add.png" /><br />Add Party</div></a>
-                
+                <a href="moderateIssues.aspx"><div class="buttons"><img src="../images/admin/icon-add.png" /><br />Moderate Issue</div></a>
+                <a href="moderateComment.aspx"> <div class="buttons"><img src="../images/admin/icon-add.png" /><br />Moderate Comment</div></a>
+                <a href="viewMP.aspx"> <div class="buttons"><img src="../images/admin/icon-add.png" /><br />Search Mp</div></a>
+           
             </div>
             <div id="content-main">
                 <div id="content-body">

@@ -24,24 +24,25 @@ public class LikeDislikeDAL
 		//
 	}
 
-    public Int64 updateData(likeDislikeBo likedislikebo)
+    public DataTable updateData(likeDislikeBo likedislikebo)
     {
         try
         {
 
-            query = "LIKE_DISLIKE_CLICK";
+            query = "LIKE_DISLIKE_CLICK1";
             if (con.State == ConnectionState.Closed)
             {
                 con.Open();
             }
-            cmd = new SqlCommand(query, con);
+            dap = new SqlDataAdapter(query, con);
 
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@commentId",likedislikebo.commentId);
-            cmd.Parameters.AddWithValue("@guid",likedislikebo.guId);
-            cmd.Parameters.AddWithValue("@likeDislike",likedislikebo.likeDislike);
-             Int64 issueId = Convert.ToInt64( cmd.ExecuteScalar());
-             return issueId;
+            dap.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dap.SelectCommand.Parameters.AddWithValue("@commentId", likedislikebo.commentId);
+            dap.SelectCommand.Parameters.AddWithValue("@guid", likedislikebo.guId);
+            dap.SelectCommand.Parameters.AddWithValue("@likeDislike", likedislikebo.likeDislike);
+            DataTable dt = new DataTable();
+            dap.Fill(dt);
+            return dt;
         }
         catch
         {
@@ -51,8 +52,39 @@ public class LikeDislikeDAL
         {
             if (con.State == ConnectionState.Open)
                 con.Close();
-            cmd.Dispose();
+           dap.Dispose();
         }
     }
+
+    //public Int64 updateData(likeDislikeBo likedislikebo)
+    //{
+    //    try
+    //    {
+
+    //        query = "LIKE_DISLIKE_CLICK";
+    //        if (con.State == ConnectionState.Closed)
+    //        {
+    //            con.Open();
+    //        }
+    //        cmd = new SqlCommand(query, con);
+
+    //        cmd.CommandType = CommandType.StoredProcedure;
+    //        cmd.Parameters.AddWithValue("@commentId", likedislikebo.commentId);
+    //        cmd.Parameters.AddWithValue("@guid", likedislikebo.guId);
+    //        cmd.Parameters.AddWithValue("@likeDislike", likedislikebo.likeDislike);
+    //        Int64 issueId = Convert.ToInt64(cmd.ExecuteScalar());
+    //        return issueId;
+    //    }
+    //    catch
+    //    {
+    //        throw;
+    //    }
+    //    finally
+    //    {
+    //        if (con.State == ConnectionState.Open)
+    //            con.Close();
+    //        cmd.Dispose();
+    //    }
+    //}
 
 }

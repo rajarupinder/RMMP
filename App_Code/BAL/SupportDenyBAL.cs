@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 /// <summary>
 /// Summary description for SupportDenyBAL
@@ -15,11 +16,11 @@ public class SupportDenyBAL
 		// TODO: Add constructor logic here
 		//
 	}
-    public void updateData(supportDenyBO supportdenybo)
+    public DataTable updateData(supportDenyBO supportdenybo)
     {
         try
         {
-            supportdenydal.updateData(supportdenybo);
+           return supportdenydal.updateData(supportdenybo);
         }
         catch
         {
@@ -30,4 +31,19 @@ public class SupportDenyBAL
         }
 
     }
+    //public void updateData(supportDenyBO supportdenybo)
+    //{
+    //    try
+    //    {
+    //        supportdenydal.updateData(supportdenybo);
+    //    }
+    //    catch
+    //    {
+    //        throw;
+    //    }
+    //    finally
+    //    {
+    //    }
+
+    //}
 }

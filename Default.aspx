@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default"%>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <title>Welcome to Rate My MP</title>
 <link rel="stylesheet" type="text/css" href="CSS/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="CSS/bootstrap-responsive.min.css" />
+<link rel="stylesheet" type="text/css" href="CSS/bootstrap-responsive.min.css"/>
 <link rel="stylesheet" type="text/css" href="CSS/style.css" />
 <%--<script type="text/javascript" src="JS/jquery.js"></script>--%>
     <script type="text/javascript" src="JS/jquery-1.9.1.js"></script>
@@ -193,7 +193,6 @@
                     
             }
 
-
             function signinValueCheck() {
                 var email = $("#<%= signinemail.ClientID %>").val();
                 var password = $("#<%= signinPassword.ClientID %>").val();
@@ -202,10 +201,43 @@
                     return false;
                 }
                 else {
+                    __doPostBack("btnSingin", '');// make postback to server.
                     return true;
                 }
 
             }
+            function OnKeyUp(obj)// for chrome and ie
+            {
+               if (obj.id == "signinPassword" && window.event.keyCode == 13)
+                {      
+                   var clickButton = document.getElementById("<%= btnSingin.ClientID %>");
+                   clickButton.click(); // call click event of  signin button.
+                }
+             }
+
+
+            function keypress(event) //for firefox
+            {
+                var key = event.keyCode;
+                if (key == 13)
+                { 
+                   var btnid = "#<%=btnSingin.ClientID%>";
+                    $(btnid).click();
+
+                   // return true;
+                   
+                }
+            }
+
+
+
+
+           // $("#<%= signinPassword.ClientID %>").keydown(function (e) {
+               // if (e.keyCode == 13) {
+                   // $("#<%=btnSingin.ClientID%>").click();
+               // }
+           // });
+
 
             function signupValueCheck() {
                 var email = $("#<%= email.ClientID %>").val();
@@ -217,6 +249,7 @@
                     return false;
                 }
                 else {
+
                     return true;
                 }
             }
@@ -225,8 +258,10 @@
 
   <script>
  
-      function email()
+      document.getElementById("forgotlink").addEventListener("click", emails, false);// this is needed for chrome browser in case of anchor tag to call click event.
+      function emails()
       {
+         
           var emailID = $('#signinemail').val();
           if (emailID == '')
           {
@@ -236,9 +271,10 @@
           }
           else
           {
+              $("#forgotlink").attr('href', "#forgot");
+
               //PageMethods.generatePasscode(emailID);
-              //$("#forgotlink").attr('href', "#forgot");
-             
+             // here generatePasscode  is a static method in serverside. this is the way how to call serverside method from client side javascript function.
               return PageMethods.generatePasscode(emailID, function (result) {
 
                   if (result == "showdivs")
@@ -249,19 +285,22 @@
                   }
                   else if(result=="invalidEmails")
                   {
-
+                      alert("Invalid Emails")
+                      $("#forgot").fadeOut(500);
                       $("#forgotlink").attr('href', "#");
-                      //alert("angel");
+                      
                   }
                   else if (result == "enterEmail")
                   {
                       $("#forgotlink").attr('href', "#");
-                      //alert("pathak");
+                      
                     }
               });
           }
       }
 </script>
+
+  
 </head>
 <body>
 <!-- Forgot Password Modal Starts-->
@@ -272,7 +311,7 @@
         <h3>Forgot Password?</h3>
     </header>
     <div id="kp" class="modal-body">
-        <h4>Enter Code and Reset Password</h4>
+        <h4>Get passcode from email and reset password</h4>
         <p>
         <div id="login">
         	<table align="center">
@@ -320,28 +359,33 @@
 	<!-- Header Starts-->
 	<section class="row-fluid">
     	<header class="span12 bgcolor-navyblue">
+            <div class="div-logo">
+                <img src="images/logo.png" />
+            </div>
         	<span class="pull-right  padding-bottom20 mg-top10 bgcolor-navyblue mg-right40">
 				<%--<button class="btn"><b>LOGIN</b></button>--%>
-                 <asp:LinkButton ID="btnSingin" class="btn" runat="server" OnClick="btnSingin_Click" TabIndex="2">Login</asp:LinkButton>
+                 <asp:LinkButton ID="btnSingin" class="btn" runat="server" OnClick="btnSingin_Click" TabIndex="3">Login</asp:LinkButton>
             </span>
             
             <span class="pull-right mg-top10 bgcolor-navyblue mg-right58">
             	<table class="pull-right color-white span12">
                   	<tr>
                        	<td><%--<input type="text"  placeholder="Email" class="input-large"/>--%>
-                            <asp:TextBox ID="signinemail" class="input-large" placeholder="email" runat="server"  MaxLength="49"></asp:TextBox>
-                       <asp:RegularExpressionValidator ID="signinEmailValidation"  runat="server" ErrorMessage="Please enter valid email id" ControlToValidate="signinemail" ForeColor="#FF0066" SetFocusOnError="True" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>  
+                            <asp:TextBox ID="signinemail" class="input-large" placeholder="email" runat="server"  MaxLength="49" TabIndex="1"></asp:TextBox>
+                       <asp:RegularExpressionValidator ID="signinEmailValidation"  runat="server" ErrorMessage=" enter valid email id" ControlToValidate="signinemail" ForeColor="#FF0066" SetFocusOnError="True" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>  
                            </td>
                         <td><%--<input type="password"  placeholder="Password" class="input-large"/>--%>
-                            <asp:TextBox ID="signinPassword"  class="input-large mg-left8" placeholder="password" runat="server" TextMode="Password" MaxLength="49" TabIndex="1"></asp:TextBox>
-                        
+                            <asp:TextBox ID="signinPassword"  class="input-large mg-left8" placeholder="password" runat="server" onKeyPress=" return keypress(event);" onKeyUp = "OnKeyUp(this);" TextMode="Password" MaxLength="49" TabIndex="2"></asp:TextBox>
+                        <%--  onKeyPress="keypress(event);" --%>
                         </td>
                 	</tr>
              	   	<tr>
-                      	<td><asp:CheckBox ID="chkRememberMe" Class="chckpad-right4" runat="server" TabIndex="3" />Remember me</td>
+                      	<td><asp:CheckBox ID="chkRememberMe" Class="chckpad-right4" runat="server" TabIndex="4" />Remember me</td>
                         <td>
-                           <!-- <a  id="kkk" href="#forgot" data-toggle="modal" onclick="email()" class="color-white">Forgot Password?</a> -->
-                            <a  id="forgotlink" href="#" data-toggle="modal" onclick="email()" class="color-white mg-left8">Forgot Password?</a>
+                          
+                            <a id="forgotlink" href="javascript:void(0)"  data-toggle="modal" onclick="emails()" class="color-white mg-left8" tabindex="5">Forgot Password?</a>
+                             <%--<a  id="forgotlink"  href="#" data-toggle="modal"  class="color-white mg-left8" tabindex="5">Forgot Password?</a>--%>
+                             <%--<a  id="forgotlink" href="javascript:email()" data-toggle="modal"  class="color-white mg-left8" tabindex="5">Forgot Password?</a>--%>
                             <%--<asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>--%>
                             <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" EnablePageMethods="true"></asp:ScriptManager>
                         </td>
@@ -350,15 +394,15 @@
             </span> 
 		</header>
 	</section>
-	<!-- Header Starts-->
+	<!-- Header Ends-->
 
 	<!-- Middle Starts-->
     <section class="row-fluid">
     	<section class="span12">
-        	<aside class="span7 mg-top40">
+        	<aside class="span7 mg-top30">
             	<span class="thumbnails">
-                	<span class="thumbnail offset2 span7 padding-bottom60 padding-top40">
-                    	<img src="images/rpm1.png" />
+                	<span class="thumbnail offset2 span7 padding-bottom65 padding-top40">
+                    	<img src="images/rmm-side_img.png" />
 					</span>
               	</span>
          	</aside>
@@ -376,7 +420,7 @@
           // Init the SDK upon load
           window.fbAsyncInit = function () {
               FB.init({
-                  appId: '421695167935164', // App ID  214812398681584
+                  appId: '421695167935164', // App ID  214812398681584 final app id 421695167935164
                   channelUrl: '//' + window.location.hostname + '/channel', // Path to your Channel File
                   status: true, // check login status
                   cookie: true, // enable cookies to allow the server to access the session
@@ -437,12 +481,12 @@
               }, { scope: 'email' });
           }
           </script>
-                               <div  id="facebooksingup" class="btn btn-primary btn-large padding-left68 padding-right68" onclick="login()"><img src="images/facebook-btn.png" /><b>Sign Up With Facebook</b></div>
+                               <div  id="facebooksingup" class="btn btn-primary btn-large padding-left68 padding-right68" onclick="login()"><img src="images/facebook-btn.png" /><b tabindex="6">Sign In With Facebook</b></div>
 
                        	</td>
                     </tr>
                     <tr>
-                      	<td><div id="googlesignup" class="btn btn-danger mg-top10 btn-large padding-left75 padding-right86"><img src="images/google-btn.png" /><b>Sign Up With Google</b></div>
+                      	<td><div id="googlesignup" class="btn btn-danger mg-top10 btn-large padding-left75 padding-right86"><img src="images/google-btn.png" /><b tabindex="7">Sign In With Google</b></div>
 
                       	</td>
                     </tr>
@@ -494,21 +538,21 @@
     
    	<!-- Footer Starts-->    
 	<section class="row-fluid">
-       	<footer class="span12 bgcolor-navyblue">
+       	<footer class="span12 footer_main bgcolor-navyblue">
            	<nav class="nav">
                	<ul class="nav nav-tabs padding-top20 span3 bottom-border-none mg-left10">
-                   	<li><a href="#" class="transition color-white">About Us</a></li>
-                   	<li><a href="#" class="transition color-white">Our Mission</a></li>
-                   	<li><a href="#" class="transition color-white">Contact Us</a></li>
+                   	<li><a href="Web_Forms/aboutus.aspx" class="transition color-white" tabindex="13">About Us</a></li>
+                   	<li><a href="Web_Forms/ourmission.aspx" class="transition color-white" tabindex="14">Our Mission</a></li>
+                   	<li><a href="Web_Forms/contactus.aspx" class="transition color-white" tabindex="15">Contact Us</a></li>
     	         </ul>
         	     <span class="pull-left mg-right40 padding-top15 mg-top15 bgcolor-navyblue padding-top15  padding-left50 padding-right50">
                  	<span class="color-white mg-top50 padding-top20">&copy; 2013 Rate My MP | <a href="#" class="color-white">Terms & Privacy</a></span>	
                  </span>
                     
                  <span class="pull-right mg-right40 padding-top15 bgcolor-navyblue padding-top15  ">
-                    	<span class=""><a href="https://facebook.com"><img src="images/facebook-square.png" /></a></span>
-                       	<span class=""><a href="https://gmail.com" ><img src="images/google-square.png" /></a></span>
-                       	<span class=""><a href="https://twitter.com"><img src="images/twitter-square.png" /></a></span> 
+                    	<span class=""><a href="https://facebook.com"><img src="images/facebook-square.png" tabindex="16" /></a></span>
+                       	<span class=""><a href="https://gmail.com" ><img src="images/google-square.png" tabindex="17" /></a></span>
+                       	<span class=""><a href="https://twitter.com"><img src="images/twitter-square.png" tabindex="18" /></a></span> 
                  </span>
                     <!--<span class="span10 offset1">
                     	<span class="color-white">&copy; 2013 Rate My MP | <a href="#" class="color-white">Terms & Privacy</a></span>
